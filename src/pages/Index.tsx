@@ -7,6 +7,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 
 type Message = {
@@ -113,7 +115,13 @@ const Index = () => {
                         }`}
                         aria-live={m.role === "assistant" ? "polite" : undefined}
                       >
-                        {m.content}
+                        {m.role === "assistant" ? (
+                          <ReactMarkdown remarkPlugins={[remarkGfm]} className="space-y-2">
+                            {m.content}
+                          </ReactMarkdown>
+                        ) : (
+                          <span>{m.content}</span>
+                        )}
                       </div>
                     </div>
                   ))}
