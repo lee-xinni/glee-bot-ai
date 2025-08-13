@@ -26,12 +26,31 @@ const Index = () => {
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [pendingIndex, setPendingIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages]);
+
+  const pendingPhrases = [
+    "Warming up the vocal cords…",
+    "Adjusting the spotlight…",
+    "Hitting the high note…",
+    "Adding a touch of jazz hands…",
+  ];
+
+  useEffect(() => {
+    if (!loading) {
+      setPendingIndex(0);
+      return;
+    }
+    const id = setInterval(() => {
+      setPendingIndex((i) => (i + 1) % pendingPhrases.length);
+    }, 1800);
+    return () => clearInterval(id);
+  }, [loading]);
 
   const sendMessage = async () => {
     if (!input.trim() || loading) return;
@@ -148,9 +167,15 @@ const Index = () => {
                     {loading ? "Sending..." : "Send"}
                   </Button>
                 </div>
-                <p className="text-xs text-muted-foreground mt-2">
-                  Tip: This persona channels Rachel Berry’s tone. No copyrighted lyrics will be reproduced.
-                </p>
+                  {loading ? (
+                    <p className="text-xs text-muted-foreground mt-2 animate-pulse" aria-live="polite">
+                      {pendingPhrases[pendingIndex]}
+                    </p>
+                  ) : (
+                    <p className="text-xs text-muted-foreground mt-2">
+                      Tip: This persona channels Rachel Berry’s tone. No copyrighted lyrics will be reproduced.
+                    </p>
+                  )}
               </div>
             </Card>
           </section>
