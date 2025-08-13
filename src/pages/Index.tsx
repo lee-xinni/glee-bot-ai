@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 
 type Message = {
@@ -42,22 +43,15 @@ const Index = () => {
         .concat(userMessage)
         .map((m) => ({ role: m.role, content: m.content }));
 
-      const url = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/rachel-chat`;
-      const resp = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
-        },
-        body: JSON.stringify({ messages: apiMessages }),
+      const { data, error } = await supabase.functions.invoke('rachel-chat', {
+        body: { messages: apiMessages },
       });
 
-      if (!resp.ok) {
-        throw new Error(await resp.text());
+      if (error) {
+        throw new Error(error.message || "Function invocation failed");
       }
 
-      const data = await resp.json();
-      const assistantText: string = data?.content ?? "";
+      const assistantText: string = (data as any)?.content ?? "";
       setMessages((m) => [...m, { role: "assistant", content: assistantText }]);
     } catch (err: any) {
       console.error(err);

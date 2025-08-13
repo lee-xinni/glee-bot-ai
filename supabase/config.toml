@@ -1,1 +1,4 @@
 project_id = "wommdzioaoymqgeemhll"
+
+[functions.rachel-chat]
+verify_jwt = false
