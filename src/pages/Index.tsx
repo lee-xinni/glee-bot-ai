@@ -114,7 +114,7 @@ const Index = () => {
               Rachel Berry Chatbot
             </h1>
             <p className="text-muted-foreground text-lg">
-              Talk to an upbeat, theatrical assistant. Your API key stays safe—requests are securely proxied through Supabase.
+              Like a Broadway lead: dramatic, confident, and always ready with the perfect one-liner.
             </p>
           </div>
         </header>
