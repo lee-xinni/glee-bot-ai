@@ -111,7 +111,7 @@ const Index = () => {
         <header className="container py-10">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-              Rachel Berry Chatbot
+              Chat with Your Favourite Leading Lady
             </h1>
             <p className="text-muted-foreground text-lg">
               Like a Broadway lead: dramatic, confident, and always ready with the perfect one-liner.
