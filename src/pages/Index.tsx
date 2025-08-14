@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Send, Star } from "lucide-react";
+import { Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import ReactMarkdown from "react-markdown";
@@ -120,17 +120,7 @@ const Index = () => {
         </header>
 
         <main className="container pb-16">
-          <section aria-label="Chat" className="mx-auto max-w-3xl relative">
-            <div className="pointer-events-none hidden md:flex absolute left-[-56px] top-10 flex-col items-center gap-2">
-              <Star className="h-4 w-4 text-star opacity-70" aria-hidden="true" fill="currentColor" strokeWidth={1.5} />
-              <Star className="h-6 w-6 text-star opacity-90" aria-hidden="true" fill="currentColor" strokeWidth={1.5} />
-              <Star className="h-5 w-5 text-star opacity-80" aria-hidden="true" fill="currentColor" strokeWidth={1.5} />
-            </div>
-            <div className="pointer-events-none hidden md:flex absolute right-[-56px] bottom-10 flex-col items-center gap-2">
-              <Star className="h-5 w-5 text-star opacity-80" aria-hidden="true" fill="currentColor" strokeWidth={1.5} />
-              <Star className="h-7 w-7 text-star opacity-90" aria-hidden="true" fill="currentColor" strokeWidth={1.5} />
-              <Star className="h-4 w-4 text-star opacity-70" aria-hidden="true" fill="currentColor" strokeWidth={1.5} />
-            </div>
+          <section aria-label="Chat" className="mx-auto max-w-3xl">
             <Card className="p-0 overflow-hidden border">
               <ScrollArea className="h-[52vh] md:h-[60vh] p-4" ref={scrollRef}>
                 <div className="space-y-4">
